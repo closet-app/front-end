@@ -5,7 +5,6 @@ import {
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { ReactNode } from "react";
-import React from "react";
 import theme from "../lib/theme";
 
 type Props = {
