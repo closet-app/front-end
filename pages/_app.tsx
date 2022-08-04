@@ -1,10 +1,21 @@
-import type { AppProps } from 'next/app'
-import { ChakraProvider } from '@chakra-ui/react'
+import type { AppProps } from "next/app";
+import Chakra from "../components/Chakra";
+import Layout from "../components/layouts";
+import Fonts from "../components/Fonts";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <ChakraProvider>
-    <Component {...pageProps} />
-  </ChakraProvider>
+if (typeof window !== "undefined") {
+  window.history.scrollRestoration = "manual";
 }
 
-export default MyApp
+function Website({ Component, pageProps, router }: AppProps) {
+  return (
+    <Chakra cookies={pageProps.cookies}>
+      <Fonts/>
+      <Layout router={router}>
+        <Component {...pageProps} />
+      </Layout>
+    </Chakra>
+  );
+}
+
+export default Website;

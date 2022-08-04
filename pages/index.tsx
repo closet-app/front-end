@@ -1,12 +1,9 @@
-import type { NextPage } from 'next';
-import { Container,Text } from '@chakra-ui/react';
+import type { NextPage } from "next";
+import { Container, Text } from "@chakra-ui/react";
+import Layout from "../components/layouts/index";
 
 const Home: NextPage = () => {
-  return (
-    <Container>
-      <Text>I am cool looking text</Text>
-    </Container>
-  )
-}
+  return <div>'i a'</div>;
+};
 
-export default Home
+export default Home;
