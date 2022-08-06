@@ -4,11 +4,10 @@ import Footer from "../Footer";
 import { ReactNode } from "react";
 import Head from "next/head";
 type Props = {
-  router?: any;
   children: ReactNode;
 };
 
-const Main = ({ router, children }: Props) => {
+const Main = ({ children }: Props) => {
   return (
     <Box as="main">
       <Head>
