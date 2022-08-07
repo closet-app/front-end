@@ -4,6 +4,7 @@ import Head from "next/head";
 import { GridItemStyle } from "../GridItem";
 import NavBar from "../NavBar";
 import Footer from "../Footer";
+import { Box } from "@chakra-ui/react";
 
 interface LayoutProps {
   children: ReactNode;
@@ -37,7 +38,7 @@ const Layout = ({ children, title, base = false }: LayoutProps) => {
           </Head>
         )}
         {!base && <NavBar />}
-        {children}
+        <Box height="100vh">{children}</Box>
         {!base && <Footer />}
         <GridItemStyle />
       </>
