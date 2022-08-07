@@ -37,6 +37,7 @@ const Register: NextPage = () => {
               }}
               onSubmit={async (values) => {
                 const response = await register({ options: values });
+                console.log(response);
               }}
             >
               {({ isSubmitting }) => (
