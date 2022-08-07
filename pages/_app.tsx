@@ -19,7 +19,7 @@ function Website({ Component, pageProps }: AppProps) {
   return (
     <Provider value={client}>
       <Chakra cookies={pageProps.cookies}>
-        <Fonts />
+        {/* <Fonts /> */}
         <Layout>
           <Component {...pageProps} />
         </Layout>

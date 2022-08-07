@@ -13,8 +13,11 @@ import Layout from "../components/layouts/Article";
 import NextLink from "next/link";
 import { NextPage } from "next";
 import { useRegisterMutation } from "../generated/graphql";
+import { toErrorMap } from "../utils/toErrorMap";
+import { useRouter } from "next/router";
 
 const Register: NextPage = () => {
+  const router = useRouter();
   const [, register] = useRegisterMutation();
 
   return (
@@ -35,9 +38,14 @@ const Register: NextPage = () => {
                 email: "",
                 password: "",
               }}
-              onSubmit={async (values) => {
+              onSubmit={async (values, { setErrors }) => {
                 const response = await register({ options: values });
-                console.log(response);
+                if (response.data?.register.errors) {
+                  setErrors(toErrorMap(response.data.register.errors));
+                } else if (response.data?.register.user) {
+                  // worked
+                  router.push("/");
+                }
               }}
             >
               {({ isSubmitting }) => (

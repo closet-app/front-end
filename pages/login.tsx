@@ -65,7 +65,7 @@ const Login: NextPage = ({}: LoginProps) => {
                       colorScheme="telegram"
                       width="50%"
                     >
-                      Log in to your account
+                      Log in
                     </Button>
                   </Box>
                 </Form>
