@@ -1,13 +1,12 @@
 import { Box } from "@chakra-ui/react";
-import NavBar from "../NavBar";
-import Footer from "../Footer";
 import { ReactNode } from "react";
 import Head from "next/head";
+
 type Props = {
   children: ReactNode;
 };
 
-const Main = ({ children }: Props) => {
+const Layout = ({ children }: Props) => {
   return (
     <Box as="main">
       <Head>
@@ -20,13 +19,9 @@ const Main = ({ children }: Props) => {
         <title>Homepage - Community Closet </title>
       </Head>
 
-      <NavBar />
-
-      {children}
-
-      <Footer />
+      <Box>{children}</Box>
     </Box>
   );
 };
 
-export default Main;
+export default Layout;
