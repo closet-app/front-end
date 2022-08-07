@@ -11,7 +11,12 @@ import { Form, Formik } from "formik";
 import InputField from "../components/InputField";
 import Layout from "../components/layouts/Article";
 import NextLink from "next/link";
-const Register = () => {
+import { NextPage } from "next";
+import { useRegisterMutation } from "../generated/graphql";
+
+const Register: NextPage = () => {
+  const [, register] = useRegisterMutation();
+
   return (
     <Layout title="Register" base={true}>
       <Flex height="full" justifyContent="center" alignItems="center">
@@ -30,8 +35,8 @@ const Register = () => {
                 email: "",
                 password: "",
               }}
-              onSubmit={(values) => {
-                console.log({ values });
+              onSubmit={async (values) => {
+                const response = await register({ options: values });
               }}
             >
               {({ isSubmitting }) => (
