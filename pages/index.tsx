@@ -1,10 +1,11 @@
+import { Box } from "@chakra-ui/react";
 import type { NextPage } from "next";
-import Layout from "../components/layouts/index";
+import Layout from "../components/layouts/Article";
 
 const Home: NextPage = () => {
   return (
     <Layout>
-      <div>'i a'</div>
+      <Box backgroundColor="red">a</Box>
     </Layout>
   );
 };
