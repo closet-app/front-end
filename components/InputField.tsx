@@ -7,19 +7,19 @@ import {
 import { FieldHookConfig, useField } from "formik";
 
 type InputFieldProps = FieldHookConfig<any> & {
-  name: string;
   label: string;
+  name: string;
   placeholder?: string;
 };
 
 const InputField = ({ label, ...props }: InputFieldProps) => {
   const [field, { error }] = useField(props);
+
   return (
     <FormControl isInvalid={!!error}>
       <FormLabel>{label}</FormLabel>
       <Input
         {...field}
-        {...props}
         name={props.name}
         id={field.name}
         placeholder={props.placeholder}
