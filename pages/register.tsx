@@ -13,23 +13,10 @@ import Layout from "../components/layouts/Article";
 import NextLink from "next/link";
 import { useMutation } from "urql";
 import { NextPage } from "next";
-
-const REGISTER_MUT = `mutation Register($options: UserInput!) {
-  register(options: $options) {
-    errors {
-      message
-      field
-    }
-    token
-    user {
-      email
-      id
-    }
-  }
-}`;
+import { useRegisterMutation } from "../generated/graphql";
 
 const Register: NextPage = () => {
-  const [, register] = useMutation(REGISTER_MUT);
+  const [, register] = useRegisterMutation();
 
   return (
     <Layout title="Register" base={true}>
@@ -50,9 +37,7 @@ const Register: NextPage = () => {
                 password: "",
               }}
               onSubmit={async (values) => {
-                console.log({ values });
-                const user = await register({ options: values });
-                console.log(user);
+                const response = await register({ options: values });
               }}
             >
               {({ isSubmitting }) => (

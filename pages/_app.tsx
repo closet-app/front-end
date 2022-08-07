@@ -10,6 +10,9 @@ if (typeof window !== "undefined") {
 
 const client = createClient({
   url: "http://localhost:4000/graphql",
+  fetchOptions: {
+    credentials: "include",
+  },
 });
 
 function Website({ Component, pageProps }: AppProps) {
