@@ -11,7 +11,26 @@ import { Form, Formik } from "formik";
 import InputField from "../components/InputField";
 import Layout from "../components/layouts/Article";
 import NextLink from "next/link";
-const Register = () => {
+import { useMutation } from "urql";
+import { NextPage } from "next";
+
+const REGISTER_MUT = `mutation Register($options: UserInput!) {
+  register(options: $options) {
+    errors {
+      message
+      field
+    }
+    token
+    user {
+      email
+      id
+    }
+  }
+}`;
+
+const Register: NextPage = () => {
+  const [, register] = useMutation(REGISTER_MUT);
+
   return (
     <Layout title="Register" base={true}>
       <Flex height="full" justifyContent="center" alignItems="center">
@@ -30,8 +49,10 @@ const Register = () => {
                 email: "",
                 password: "",
               }}
-              onSubmit={(values) => {
+              onSubmit={async (values) => {
                 console.log({ values });
+                const user = await register({ options: values });
+                console.log(user);
               }}
             >
               {({ isSubmitting }) => (

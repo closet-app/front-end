@@ -11,10 +11,11 @@ import { Formik, Form } from "formik";
 import InputField from "../components/InputField";
 import Layout from "../components/layouts/Article";
 import NextLink from "next/link";
+import { NextPage } from "next";
 
 interface LoginProps {}
 
-const Login = ({}: LoginProps) => {
+const Login: NextPage = ({}: LoginProps) => {
   return (
     <Layout title="Login" base={true}>
       <Flex height="full" justifyContent="center" alignItems="center">
