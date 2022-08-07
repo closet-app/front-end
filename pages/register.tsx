@@ -11,7 +11,6 @@ import { Form, Formik } from "formik";
 import InputField from "../components/InputField";
 import Layout from "../components/layouts/Article";
 import NextLink from "next/link";
-import { useMutation } from "urql";
 import { NextPage } from "next";
 import { useRegisterMutation } from "../generated/graphql";
 
