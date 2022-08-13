@@ -12,10 +12,16 @@ import InputField from "../components/InputField";
 import Layout from "../components/layouts/Article";
 import NextLink from "next/link";
 import { NextPage } from "next";
+import { useRouter } from "next/router";
+import { useLoginMutation } from "../generated/graphql";
+import { toErrorMap } from "../utils/toErrorMap";
 
 interface LoginProps {}
 
 const Login: NextPage = ({}: LoginProps) => {
+  const router = useRouter();
+  const [, login] = useLoginMutation();
+
   return (
     <Layout title="Login" base={true}>
       <Flex height="full" justifyContent="center" alignItems="center">
@@ -32,8 +38,17 @@ const Login: NextPage = ({}: LoginProps) => {
                 email: "",
                 password: "",
               }}
-              onSubmit={(values) => {
-                console.log({ values });
+              onSubmit={async (values, { setErrors }) => {
+                const { data } = await login({ options: values });
+
+                if (data?.login.errors) {
+                  setErrors(toErrorMap(data.login.errors));
+                } else if (data?.login.user) {
+                  // worked
+                  console.log(data.login);
+                  localStorage.setItem("token", data.login.token as string);
+                  router.push("/");
+                }
               }}
             >
               {({ isSubmitting }) => (

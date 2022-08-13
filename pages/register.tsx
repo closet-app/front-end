@@ -39,11 +39,13 @@ const Register: NextPage = () => {
                 password: "",
               }}
               onSubmit={async (values, { setErrors }) => {
-                const response = await register({ options: values });
-                if (response.data?.register.errors) {
-                  setErrors(toErrorMap(response.data.register.errors));
-                } else if (response.data?.register.user) {
+                const { data } = await register({ options: values });
+                if (data?.register.errors) {
+                  setErrors(toErrorMap(data.register.errors));
+                } else if (data?.register.user) {
                   // worked
+                  console.log(data.register);
+                  localStorage.setItem("token", data.register.token as string);
                   router.push("/");
                 }
               }}

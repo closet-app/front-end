@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
 import Chakra from "../components/Chakra";
-import Fonts from "../components/Fonts";
+// import Fonts from "../components/Fonts";
 import Layout from "../components/layouts";
 import { createClient, Provider } from "urql";
 
