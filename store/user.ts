@@ -6,6 +6,7 @@ interface UserState {
   firstName: string;
   lastName: string;
   email: string;
+  verified: boolean;
   login: (options: {
     id: number;
     email: string;
@@ -22,9 +23,9 @@ const useUserStore = create<UserState>()(
       firstName: "",
       lastName: "",
       email: "",
-      token: "",
+      verified: false,
       login: ({ id, email, firstName, lastName, token }) => {
-        set({ id, email, firstName, lastName });
+        set({ id, email, firstName, lastName, verified: true });
         localStorage.setItem("token", token);
       },
     }))
