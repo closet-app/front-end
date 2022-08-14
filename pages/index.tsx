@@ -5,6 +5,7 @@ import Layout from "../components/layouts/Article";
 const Home: NextPage = () => {
   return (
     <Layout>
+      <Box>I HAVE BEEN AUTHORIZED</Box>
       <Box backgroundColor="red">a</Box>
     </Layout>
   );
