@@ -15,9 +15,11 @@ import { NextPage } from "next";
 import { useRegisterMutation } from "../generated/graphql";
 import { toErrorMap } from "../utils/toErrorMap";
 import { useRouter } from "next/router";
+import useUserStore from "../store/user";
 
 const Register: NextPage = () => {
   const router = useRouter();
+  const stateLogin = useUserStore((state) => state.login);
   const [, register] = useRegisterMutation();
 
   return (
@@ -44,8 +46,10 @@ const Register: NextPage = () => {
                   setErrors(toErrorMap(data.register.errors));
                 } else if (data?.register.user) {
                   // worked
-                  console.log(data.register);
-                  localStorage.setItem("token", data.register.token as string);
+                  stateLogin({
+                    ...data.register.user,
+                    token: data.register.token as string,
+                  });
                   router.push("/");
                 }
               }}

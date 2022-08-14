@@ -15,11 +15,13 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useLoginMutation } from "../generated/graphql";
 import { toErrorMap } from "../utils/toErrorMap";
+import useUserStore from "../store/user";
 
 interface LoginProps {}
 
 const Login: NextPage = ({}: LoginProps) => {
   const router = useRouter();
+  const stateLogin = useUserStore((state) => state.login);
   const [, login] = useLoginMutation();
 
   return (
@@ -44,9 +46,10 @@ const Login: NextPage = ({}: LoginProps) => {
                 if (data?.login.errors) {
                   setErrors(toErrorMap(data.login.errors));
                 } else if (data?.login.user) {
-                  // worked
-                  console.log(data.login);
-                  localStorage.setItem("token", data.login.token as string);
+                  stateLogin({
+                    ...data.login.user,
+                    token: data.login.token as string,
+                  });
                   router.push("/");
                 }
               }}
